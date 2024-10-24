@@ -22,3 +22,10 @@
 ### API
 - small Flask or fastAPI usecase
     - Research until next meeting
+
+
+
+### Hardware
+- Raspberry Pi 5?
+- Pi Cam? which one?
+- TPU ?
