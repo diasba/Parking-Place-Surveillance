@@ -1,7 +1,7 @@
 import ImageProcessor
+import json
 
 class OpenCVImageProcessor(ImageProcessor):
-    def process_image(self, image: Image) -> ProcessedData:
-        """Implementiert die Bildverarbeitung mit OpenCV."""
-        # OpenCV-Verarbeitungslogik
+    def process_image(self, image: Image) -> json:
+        """TODO: Implement OpenCV Imaging / returns processed json"""
         pass

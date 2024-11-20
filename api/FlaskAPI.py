@@ -1,5 +1,4 @@
 from flask import Flask, jsonify
-import threading
 
 class FlaskAPI:
     def __init__(self, data_communicator: DataCommunicator):

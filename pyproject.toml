@@ -11,6 +11,11 @@ Flask = "^3.1.0"
 tflite = "^2.10.0"
 pydantic = "^2.9.2"
 pylance = "^0.19.2"
+numpy = "^2.1.3"
+Flask-Cors = "^5.0.0"
+pycoral = "^0.2.0"
+tflite-runtime = "^2.14.0"
+SimpleITK = "^2.4.0"
 
 [tool.poetry.dev-dependencies]
 
