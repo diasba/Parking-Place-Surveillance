@@ -1,7 +1,7 @@
 from flask import Flask, jsonify
-
+import controller.data_communicator as communicator
 class FlaskAPI:
-    def __init__(self, data_communicator: DataCommunicator):
+    def __init__(self, data_communicator: communicator.DataCommunicator):
         self.app = Flask(__name__)
         self.data_communicator = data_communicator
         self.setup_routes()
