@@ -1,19 +1,24 @@
 import { Typography } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import { green } from "@mui/material/colors";
+import { green, red } from "@mui/material/colors";
 import React, { useState } from "react";
 
 type ParkingSpotProps = {
-    title: string;
-}
+  title: string;
+  occupied: boolean;
+  prediction: number;
+};
 
-export const ParkingSpot = ({title}: ParkingSpotProps) => {
-  const [occupied, setOccupied] = useState(false);
-  const [prediction, setPrediction] = useState(0);
-
+export const ParkingSpot = ({
+  title,
+  occupied,
+  prediction,
+}: ParkingSpotProps) => {
   return (
-    <Card sx={{ minWidth: 275, backgroundColor: green[400] }}>
+    <Card
+      sx={{ minWidth: 275, backgroundColor: occupied ? red[400] : green[400] }}
+    >
       <CardContent>
         <Typography variant="h5">{title}</Typography>
         <br />

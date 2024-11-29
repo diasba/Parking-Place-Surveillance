@@ -15,7 +15,8 @@ function App() {
   const fetchData = async () => {
     try {
       const response = await fetch("/mockData.json");
-      const body = await response.json() as ParkingSpot[];
+      console.log(response);
+      const body = (await response.json()) as ParkingSpot[];
       setParkingSpots(body);
     } catch (error) {
       console.error("Error fetching data: ", error);
@@ -23,18 +24,25 @@ function App() {
   };
 
   useEffect(() => {
+    // TODO: fix error
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     fetchData();
   }, []);
+
+  console.log(parkingSpots);
 
   return (
     <>
       <Header />
       <Grid container spacing={2}>
-        <ParkingSpot title="Parking Spot 1" />
-        <ParkingSpot title="Parking Spot 2" />
-        <ParkingSpot title="Parking Spot 3" />
-        <ParkingSpot title="Parking Spot 4" />
-        <ParkingSpot title="Parking Spot 5" />
+        {parkingSpots.map((parkingSpot) => (
+          <ParkingSpot
+            key={parkingSpot.id}
+            title={"Parking Spot " + parkingSpot.id}
+            occupied={parkingSpot.occupied}
+            prediction={parkingSpot.prediction}
+          />
+        ))}
       </Grid>
     </>
   );
