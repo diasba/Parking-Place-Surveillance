@@ -1,0 +1,28 @@
+[
+    {
+        "id": 1,
+        "occupied": false,
+        "prediction": 2.5
+    },
+    {
+        "id": 2,
+        "occupied": false,
+        "prediction": 2.5
+    },
+    {
+        "id": 3,
+        "occupied": true,
+        "prediction": 2.5
+    },
+    {
+        "id": 4,
+        "occupied": false,
+        "prediction": 7.5
+    },
+    {
+        "id": 5,
+        "occupied": true,
+        "prediction": 4.5
+    }
+]
+
