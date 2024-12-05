@@ -1,8 +1,10 @@
-html, body {
-    height: 100%;
+/* Page Layout */
+
+html {
+  min-height: 100%;
 }
 
-#root {
-    display: flex;
-    margin-top: 2.5rem;
+main {
+  margin-top: 4.5rem;
+  margin-bottom: 4.5rem;
 }
