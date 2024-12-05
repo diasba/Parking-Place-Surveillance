@@ -1,7 +1,8 @@
-import Grid from "@mui/material/Grid2";
-import { Header } from "./components/Header";
-import { ParkingSpot } from "./components/ParkingSpot";
-import { useEffect, useState } from "react";
+import Grid from '@mui/material/Grid2';
+import { Header } from './components/Header';
+import { ParkingSpot } from './components/ParkingSpot';
+import { useEffect, useState } from 'react';
+import { Container } from '@mui/material';
 
 type ParkingSpot = {
   id: number;
@@ -11,22 +12,19 @@ type ParkingSpot = {
 
 function App() {
   const [parkingSpots, setParkingSpots] = useState<ParkingSpot[]>([]);
-
   const fetchData = async () => {
     try {
-      const response = await fetch("/mockData.json");
+      const response = await fetch('/mockData.json');
       console.log(response);
       const body = (await response.json()) as ParkingSpot[];
       setParkingSpots(body);
     } catch (error) {
-      console.error("Error fetching data: ", error);
+      console.error('Error: ', error);
     }
   };
 
   useEffect(() => {
-    // TODO: fix error
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    fetchData();
+    void fetchData();
   }, []);
 
   console.log(parkingSpots);
@@ -34,23 +32,29 @@ function App() {
   return (
     <>
       <Header />
-      <Grid data-testid="parking-grid" container spacing={2}>
-        {parkingSpots.map((parkingSpot) => (
-          <ParkingSpot
-            key={parkingSpot.id}
-            title={"Parking Spot " + parkingSpot.id}
-            occupied={parkingSpot.occupied}
-            prediction={parkingSpot.prediction}
-          />
-        ))}
-      </Grid>
+      <main>
+        <Container>
+          <Grid
+            display='flex'
+            justifyContent='center'
+            alignItems='center'
+            data-testid='parking-grid'
+            container
+            spacing={2}
+          >
+            {parkingSpots.map((parkingSpot) => (
+              <ParkingSpot
+                key={parkingSpot.id}
+                title={'Parking Spot ' + parkingSpot.id}
+                occupied={parkingSpot.occupied}
+                prediction={parkingSpot.prediction}
+              />
+            ))}
+          </Grid>
+        </Container>
+      </main>
     </>
   );
-  /*
-    {
-      id:
-    }
-  */
 }
 
 export default App;
