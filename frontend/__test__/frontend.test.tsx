@@ -21,7 +21,7 @@ test('renders all expected components', async () => {
 
     // Assertions for each component
     expect(screen.getByRole('banner')).toBeInTheDocument(); // check header
-    expect(screen.getByText('The App')).toBeInTheDocument(); 
+    expect(screen.getByText('Free Parking')).toBeInTheDocument(); 
 
     //Check that the grid is rendered
     await waitFor(() => expect(screen.getByTestId("parking-grid")).toBeInTheDocument());
