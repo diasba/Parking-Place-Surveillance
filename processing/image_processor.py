@@ -3,5 +3,5 @@ from abc import ABC, abstractmethod
 
 class ImageProcessor(ABC):
     @abstractmethod
-    def process_image(self, image: Image) -> json:
+    def process_image(self, image) -> json:
         pass
