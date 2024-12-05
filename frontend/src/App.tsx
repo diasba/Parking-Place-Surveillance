@@ -34,7 +34,7 @@ function App() {
   return (
     <>
       <Header />
-      <Grid container spacing={2}>
+      <Grid data-testid="parking-grid" container spacing={2}>
         {parkingSpots.map((parkingSpot) => (
           <ParkingSpot
             key={parkingSpot.id}

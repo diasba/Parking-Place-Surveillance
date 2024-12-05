@@ -17,6 +17,7 @@ export const ParkingSpot = ({
 }: ParkingSpotProps) => {
   return (
     <Card
+      data-testid="parking-spot-card"
       sx={{ minWidth: 275, backgroundColor: occupied ? red[400] : green[400] }}
     >
       <CardContent>
