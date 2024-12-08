@@ -6,7 +6,7 @@ import { green, red } from '@mui/material/colors';
 type ParkingSpotProps = {
   title: string;
   occupied: boolean;
-  prediction: number;
+  prediction: string;
 };
 
 export const ParkingSpot = ({
@@ -46,7 +46,7 @@ export const ParkingSpot = ({
           <Chip label='Free' color='success' sx={{ marginY: '0.25rem' }} />
         )}
         <Divider />
-        {occupied ? (
+        {occupied && prediction ? (
           <Typography sx={{ marginY: '0.25rem' }}>
             Available in: {prediction}
           </Typography>

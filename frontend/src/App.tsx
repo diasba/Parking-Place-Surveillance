@@ -5,18 +5,18 @@ import { useEffect, useState } from 'react';
 import { Container } from '@mui/material';
 
 type ParkingSpot = {
-  id: number;
-  occupied: boolean;
-  prediction: number;
+  spot_id: number;
+  status: string;
+  prediction: number | null;
 };
 
 function App() {
   const [parkingSpots, setParkingSpots] = useState<ParkingSpot[]>([]);
   const fetchData = async () => {
     try {
-      const response = await fetch('/mockData.json');
-      console.log(response);
+      const response = await fetch('/api/parking_status'); //Using proxy
       const body = (await response.json()) as ParkingSpot[];
+      console.log("Fetched Parking Spots:", body);  // Log data in frontend console
       setParkingSpots(body);
     } catch (error) {
       console.error('Error: ', error);
@@ -26,8 +26,6 @@ function App() {
   useEffect(() => {
     void fetchData();
   }, []);
-
-  console.log(parkingSpots);
 
   return (
     <>
@@ -44,10 +42,10 @@ function App() {
           >
             {parkingSpots.map((parkingSpot) => (
               <ParkingSpot
-                key={parkingSpot.id}
-                title={'Parking Spot ' + parkingSpot.id}
-                occupied={parkingSpot.occupied}
-                prediction={parkingSpot.prediction}
+                key={parkingSpot.spot_id}
+                title={'Parking Spot ' + parkingSpot.spot_id}
+                occupied={parkingSpot.status === 'OCCUPIED'}
+                prediction={parkingSpot.prediction !== null ? parkingSpot.prediction.toString() : ''}
               />
             ))}
           </Grid>

@@ -1,19 +1,24 @@
+import sys
+import os
 import threading
+
+# Füge das Verzeichnis zum Python-Pfad hinzu
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from controller import camera_controller, data_communicator
-from processing import image_processor
+from processing.dummy_image_processor import DummyImageProcessor
 from processing import parking_spot_detector
 from scheduling import scheduler
-from api import flask_api
-
+from api import fastapi
 
 class Application:
-    def __init__(self, processor: image_processor.ImageProcessor):
+    def __init__(self, processor: DummyImageProcessor):
         self.input_controller = camera_controller.CameraController()
         self.image_processor = processor
         self.data_communicator = data_communicator.DataCommunicator()
         self.parking_spot_detector = None
         self.scheduler = scheduler.Scheduler()
-        self.api = flask_api.FlaskAPI(self.data_communicator)
+        self.api = fastapi.FastAPIApp(self.data_communicator)
 
     def run_cycle(self):
         image = self.input_controller.get_input()
@@ -29,3 +34,8 @@ class Application:
 
         self.scheduler.schedule_task(30, self.run_cycle)
         self.scheduler.run()
+
+if __name__ == "__main__":
+    processor = DummyImageProcessor()  # Example-Init
+    app = Application(processor)
+    app.start()
