@@ -1,0 +1,10 @@
+/* Page Layout */
+
+html {
+  min-height: 100%;
+}
+
+main {
+  margin-top: 4.5rem;
+  margin-bottom: 4.5rem;
+}
