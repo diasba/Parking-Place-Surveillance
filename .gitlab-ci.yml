@@ -50,5 +50,6 @@ code_coverage:
     - python --version
     - pip install --upgrade pip
     - pip install pytest
+    - pip install pytest-cov
     - pytest --cov=api --cov=app --cov=controller --cov=processing --cov=scheduling --cov=parking_spot_status.py --cov-report=term
   coverage: '/TOTAL.*\s+(\d+\%)$/'
