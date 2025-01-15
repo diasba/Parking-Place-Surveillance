@@ -1,0 +1,39 @@
+stages:
+  - build
+  - test
+
+variables:
+  PYTHON_VERSION: "3.12"
+
+build:
+  stage: build
+  image: python:${PYTHON_VERSION}
+  script:
+    - python --version
+    - pip install --upgrade pip
+    - pip install pytest
+  artifacts:
+    paths:
+      - .venv/
+    expire_in: 1 hour
+  cache:
+    key: "pip-cache"
+    paths:
+      - "~/.cache/pip/"
+
+unit-tests:
+  stage: test
+  image: python:${PYTHON_VERSION}
+  script:
+    - python --version
+    - pip install --upgrade pip
+    - pip install pytest
+    - pytest tests/
+  dependencies:
+    - build
+  artifacts:
+    when: always
+    paths:
+      - pytest_report.html
+    reports:
+      junit: junit.xml
