@@ -35,6 +35,7 @@ unit-tests:
   artifacts:
     when: always
     paths:
-      - pytest_report.html
+      - tests/junit.xml
+      - tests/pytest_report.html
     reports:
-      junit: junit.xml
+      junit: tests/junit.xml
