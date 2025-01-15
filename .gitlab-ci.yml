@@ -40,3 +40,15 @@ unit-tests:
       - tests/pytest_report.html
     reports:
       junit: tests/junit.xml
+
+code_coverage:
+  stage: test
+  needs: 
+    - unit-test
+  image: python:${PYTHON_VERSION}
+  script:
+    - python --version
+    - pip install --upgrade pip
+    - pip install pytest
+    - pytest --cov=api --cov=app --cov=controller --cov=processing --cov=scheduling --cov=parking_spot_status.py --cov-report=term
+  coverage: '/TOTAL.*\s+(\d+\%)$/'
