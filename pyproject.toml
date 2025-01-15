@@ -17,6 +17,7 @@ Flask-Cors = "^5.0.0"
 pycoral = "^0.2.0"
 SimpleITK = "^2.4.0"
 pytest = "^8.3.4"
+pytest-html = "^4.1.1"
 
 [tool.poetry.dev-dependencies]
 
