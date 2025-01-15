@@ -1,0 +1,55 @@
+stages:
+  - build
+  - test
+
+variables:
+  PYTHON_VERSION: "3.12"
+
+build:
+  stage: build
+  image: python:${PYTHON_VERSION}
+  script:
+    - python --version
+    - pip install --upgrade pip
+    - pip install pytest
+    - pip install pytest-html
+  artifacts:
+    paths:
+      - .venv/
+    expire_in: 1 hour
+  cache:
+    key: "pip-cache"
+    paths:
+      - "~/.cache/pip/"
+
+unit-tests:
+  stage: test
+  image: python:${PYTHON_VERSION}
+  script:
+    - python --version
+    - pip install --upgrade pip
+    - pip install pytest
+    - pip install pytest-html
+    - pytest tests/ --junitxml=tests/junit.xml --html=tests/pytest_report.html
+  dependencies:
+    - build
+  artifacts:
+    when: always
+    paths:
+      - tests/junit.xml
+      - tests/pytest_report.html
+    reports:
+      junit: tests/junit.xml
+
+code_coverage:
+  stage: test
+  needs: 
+    - unit-tests
+  image: python:${PYTHON_VERSION}
+  script:
+    - python --version
+    - pip install --upgrade pip
+    - pip install pytest
+    - pip install pytest-cov
+    - pytest --cov=api --cov=app --cov=controller --cov=processing --cov=scheduling --cov=parking_spot_status.py --cov-report=term
+  coverage: '/TOTAL.*\s+(\d+\%)$/'
