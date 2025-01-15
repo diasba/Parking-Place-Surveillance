@@ -11,7 +11,7 @@ build:
   script:
     - python --version
     - pip install --upgrade pip
-    - pip install pytest
+    - pip install pytest pytest-html pytest-junitxml
   artifacts:
     paths:
       - .venv/
@@ -28,7 +28,7 @@ unit-tests:
     - python --version
     - pip install --upgrade pip
     - pip install pytest
-    - pytest tests/
+    - pytest tests/ --junitxml=junit.xml --html=pytest_report.html
   dependencies:
     - build
   artifacts:
