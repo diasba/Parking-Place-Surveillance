@@ -44,7 +44,7 @@ unit-tests:
 code_coverage:
   stage: test
   needs: 
-    - unit-test
+    - unit-tests
   image: python:${PYTHON_VERSION}
   script:
     - python --version
