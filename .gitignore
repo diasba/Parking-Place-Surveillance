@@ -1,3 +1,6 @@
 __pycache__/
 .pytest_cache/
 .vscode/
+assets/
+junit.xml
+pytest_report.html
