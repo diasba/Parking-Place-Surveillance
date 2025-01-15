@@ -1,5 +1,5 @@
 import pytest
 
 class Test_Camera_Controller:
-    def  get_input(self):
+    def test_get_input(self):
         pass
