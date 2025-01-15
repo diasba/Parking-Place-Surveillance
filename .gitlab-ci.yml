@@ -29,6 +29,7 @@ unit-tests:
     - python --version
     - pip install --upgrade pip
     - pip install pytest
+    - pip install pytest-html
     - pytest tests/ --junitxml=tests/junit.xml --html=tests/pytest_report.html
   dependencies:
     - build
