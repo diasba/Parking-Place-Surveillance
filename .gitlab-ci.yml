@@ -11,7 +11,7 @@ build:
   script:
     - python --version
     - pip install --upgrade pip
-    - pip install pytes
+    - pip install pytest
     - pip install pytest-html
     - pip install pytest-junitxml
   artifacts:
