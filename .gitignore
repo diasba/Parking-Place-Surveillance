@@ -5,3 +5,7 @@ assets/
 junit.xml
 pytest_report.html
 .coverage
+.venv/*
+*.jpg
+__init__.py
+._.
