@@ -1,5 +1,6 @@
 import parking_spot_status
 import threading
+from PIL import Image
 
 class DataCommunicator:
     def __init__(self):
@@ -13,3 +14,8 @@ class DataCommunicator:
     def get_data(self) -> list[parking_spot_status.ParkingSpotStatus]:
         with self.lock:
             return self.parking_spot_status.copy()
+        
+    def get_data(self, img_path):
+        with self.lock:
+            image = Image.open(img_path)
+            return image
