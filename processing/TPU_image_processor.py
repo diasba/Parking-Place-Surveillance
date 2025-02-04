@@ -14,19 +14,27 @@ class TPUImageProcessor(image_processor):
     
     
     def predict(image):
-        # Load YOLOv5 model
+       # Load YOLOv5 model
         model = torch.hub.load('ultralytics/yolov5', 'yolov5s')
+
+        image_path = './IMG_2.jpg'
+        image = Image.open(image_path)
 
         # Run inference
         results = model(image)
         # Filter results for cars only
         car_class_name = 'car'
         detected_objects = results.pandas().xyxy[0]  # Get predictions as a Pandas DataFrame
-        car_detections = detected_objects[detected_objects['name'] == car_class_name]
+        car_detections = detected_objects[detected_objects['name'] == car_class_name or detected_objects['name'] == 'truck']
 
         # Print detected cars
         print("Detected Cars:")
         print(car_detections)
+
+        # Save detected cars to a JSON file
+        car_detections_dict = car_detections.to_dict(orient='records')
+        with open('car_detections.json', 'w') as json_file:
+            json.dump(car_detections_dict, json_file, indent=4)
 
         # Draw boxes only for cars
         if not car_detections.empty:
