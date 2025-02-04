@@ -1,0 +1,7 @@
+[
+    {"spot_id": 1, "status": "FREE", "prediction": "likely free"},
+    {"spot_id": 2, "status": "OCCUPIED", "prediction": "likely occupied"},
+    {"spot_id": 3, "status": "FREE", "prediction": "likely free"},
+    {"spot_id": 4, "status": "OCCUPIED", "prediction": "likely occupied"},
+    {"spot_id": 5, "status": "FREE", "prediction": "likely free"}
+]

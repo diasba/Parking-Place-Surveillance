@@ -15,7 +15,7 @@ class ParkingSpotStatus(BaseModel):
     prediction: str
 
 class FastAPIApp:
-    def __init__(self, data_communicator: communicator.DataCommunicator):
+    def __init__(self, data_communicator: communicator):
         self.app = FastAPI()
         self.data_communicator = data_communicator
         self.setup_routes()
