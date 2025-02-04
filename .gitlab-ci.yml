@@ -1,18 +1,24 @@
+image: python:3.11
+
 stages:
   - build
   - test
 
-variables:
-  PYTHON_VERSION: "3.12"
+before_script:
+  - python --version
+  - pip install --upgrade pip
+  - pip install poetry
+  - poetry remove torch
+  - poetry install
+  - export PYTHONPATH=$CI_PROJECT_DIR
+  - source `poetry env info --path`/bin/activate
 
 build:
   stage: build
-  image: python:${PYTHON_VERSION}
   script:
     - python --version
-    - pip install --upgrade pip
-    - pip install pytest
-    - pip install pytest-html
+    - pip install pytest pytest-html 
+    - pip install torch
   artifacts:
     paths:
       - .venv/
@@ -24,15 +30,11 @@ build:
 
 unit-tests:
   stage: test
-  image: python:${PYTHON_VERSION}
-  script:
-    - python --version
-    - pip install --upgrade pip
-    - pip install pytest
-    - pip install pytest-html
-    - pytest tests/ --junitxml=tests/junit.xml --html=tests/pytest_report.html
   dependencies:
     - build
+  script:
+    - pip install pillow
+    - pytest tests/ --junitxml=tests/junit.xml --html=tests/pytest_report.html
   artifacts:
     when: always
     paths:
@@ -45,11 +47,7 @@ code_coverage:
   stage: test
   needs: 
     - unit-tests
-  image: python:${PYTHON_VERSION}
   script:
-    - python --version
-    - pip install --upgrade pip
-    - pip install pytest
-    - pip install pytest-cov
+    - pip install pillow
     - pytest --cov=api --cov=app --cov=controller --cov=processing --cov=scheduling --cov=parking_spot_status.py --cov-report=term
   coverage: '/TOTAL.*\s+(\d+\%)$/'
