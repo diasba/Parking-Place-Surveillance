@@ -17,12 +17,16 @@ class DataCommunicator:
         self.parking_spot_status = self.get_dummy_data()
         with self.lock:
             return self.parking_spot_status.copy()
+    
     def get_dummy_data(self) -> list[parking_spot_status.ParkingSpotStatus]:
         with open('controller/dummy_data.json', 'r') as f:
             data = json.load(f)
             parking_spots = [ParkingSpotStatus(spot['spot_id'], Status[spot['status']], spot['prediction']) for spot in data]
         return parking_spots
-        
+    
+    def get_image_data(self, path) -> Image:
+        image = Image.open(path)
+        return image    
     # def get_data(self, img_path):
     #    with self.lock:
     #        image = Image.open(img_path)
