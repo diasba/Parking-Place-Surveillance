@@ -1,31 +1,30 @@
-import image_processor
 import json
 import torch
 from PIL import Image
 
-class TPUImageProcessor(image_processor):
+class TPUImageProcessor():
     def __init__(self):
         pass
         
     
-    def process_image(self, image: Image) -> json:
-        self.predict()
+    def process_image(self, image_path) -> json:
+        self.predict_from_disk(image_path)
         pass
     
     
-    def predict(image):
+    def predict_from_disk(self, image):
        # Load YOLOv5 model
         model = torch.hub.load('ultralytics/yolov5', 'yolov5s')
 
-        image_path = './IMG_2.jpg'
-        image = Image.open(image_path)
+        #image_path = './IMG_2.jpg'
+        # image = Image.open(image_path)
 
         # Run inference
         results = model(image)
         # Filter results for cars only
         car_class_name = 'car'
         detected_objects = results.pandas().xyxy[0]  # Get predictions as a Pandas DataFrame
-        car_detections = detected_objects[detected_objects['name'] == car_class_name or detected_objects['name'] == 'truck']
+        car_detections = detected_objects[detected_objects['name'] == car_class_name]
 
         # Print detected cars
         print("Detected Cars:")

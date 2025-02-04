@@ -4,13 +4,13 @@ import time
 import numpy as np
 from datetime import datetime
 from processing.image_processor import ImageProcessor
-from controller.camera_controller import CameraController
+# from controller.camera_controller import CameraController
 # from processing.opencv_image_processor import OpenCVImageProcessor
 
 
 class DummyImageProcessor(ImageProcessor):
     def __init__(self):
-        self.camera_controller = CameraController()
+        # self.camera_controller = CameraController()
         # self.opencv_processor = OpenCVImageProcessor()
         self.start_saving_images()
 
