@@ -24,4 +24,6 @@ class OpenCVImageProcessor(ImageProcessor):
             "shape": tensor_image.shape,
             "dtype": str(tensor_image.dtype)
         }
+
+        
         return json.dumps(image_data)
